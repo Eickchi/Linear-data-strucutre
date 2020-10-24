@@ -1,0 +1,81 @@
+ALGORITHM DistinctElementSumMethode1
+VAR
+    N,V:INTEGER;
+    Set1:ARRAY_OF INTEGER[N];
+    Set2:ARRAY_OF INTEGER[V];
+    i,j,Sum:INTEGER=0;
+
+BEGIN                                   //Methode 1 utulisation d'array
+    Write("donner la longeur de Set1");         
+    Read("N");                          //lecture de la longeur du tableau du set1
+    Write("donner la longeur de Set2");
+    Read("V");                          //lecture de la longeur du tableau du set2
+    FOR i FROM 0 TO N-1 STEP 1  DO
+        Write("donner set1");
+        Read(Set1[i]);                  //Remplissage du set1
+    END_FOR
+    FOR j FROM 0 TO V-1 STEP 1  DO
+        Write("donner set2");           //Remplissage du set2
+        Read(Set2[i]);
+    END_FOR
+    FOR i FROM 0 TO N-1 STEP 1  DO
+        FOR j FROM 0 TO V-1 STEP 1  DO
+            IF (Set1[i]=Set2[j]) THEN    // Comparaison de l"élement de set1 et set2 el addition de l'élement non existant  (étape1)
+                sum:=sum+Set1[i];
+            END_IF                    
+        END_FOR                                         
+    END_FOR                                             
+    FOR j FROM 0 TO V-1 STEP 1  DO                      
+        FOR i FROM 0 TO N-1 STEP 1  DO                 
+            IF (Set2[j]=Set2[i]) THEN   // meme que (l'étape 1) mais pour la deuxieme set
+                sum:=sum+Set2[j];
+            END_IF
+        END_FOR
+    END_FOR
+    Write("la somme est : ",sum);
+     
+END
+ALGORITHM DistinctElementSumMethode2  //utulisation de HashTables
+VAR
+    Htable:HASH_TABLE<INTEGER,INTEGER>;
+    Set1:ARRAY_OF INTEGER[N];
+    Set2:ARRAY_OF INTEGER[V];
+    i,j,count,sum:INTEGER=0;
+BEGIN
+    Write("donner la longeur de Set1");         
+    Read("N");                          //lecture de la longeur du tableau du set1
+    Write("donner la longeur de Set2");
+    Read("V");                          //lecture de la longeur du tableau du set2
+    FOR i FROM 0 TO N-1 STEP 1  DO
+        Write("donner set1");
+        Read(Set1[i]);                  //Remplissage du set1
+    END_FOR
+    FOR j FROM 0 TO V-1 STEP 1  DO
+        Write("donner set2");           //Remplissage du set2
+        Read(Set2[i]);
+    FOR i FROM 0 TO N-1 STEP 1  DO
+    IF (Htable.lookup(set1[i])=TRUE) THEN
+        count:=Htable.get(set1[i]);
+        Htable.insert(set1[i],count+1);
+    ELSE
+        htab.insert(set1[i],1);
+    END_IF
+    FOR j FROM 0 TO V-1 STEP 1  DO
+    IF (Htable.lookup(set2[j])=TRUE) THEN
+        count:=Htable.get(set2[j]);
+        Htable.insert(set2[j],count+1);
+    ELSE
+        htab.insert(set2[j],1);
+    END_IF
+    END_FOR
+    WHILE (i FROM 0 TO N-1 ) DO
+        IF (htabl.lookup(set1[i])==TRUE ) THEN
+            sum:=sum+set1[i];
+        END_IF
+    WHILE (j FROM 0 TO V-1 ) DO
+        IF (htabl.lookup(set2[j])==TRUE ) THEN
+            sum:=sum+set2[j];
+        END_IF
+    END_WHILE
+    Write("La somme est :",sum);
+END
